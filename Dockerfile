@@ -8,31 +8,17 @@ RUN apt-get upgrade
 RUN set -ex; \
     apt-get update \
     && apt-get install -y --no-install-recommends \
-        dbus-x11 \
-        nautilus \
-        gedit \
-        expect \
         sudo \
-        vim \
-	vlc \
+        nano \
         bash \
         net-tools \
         novnc \
-        xfce4 \
-	socat \
-        x11vnc \
-	xvfb \
-        supervisor \
         curl \
         git \
-	pulseaudio \
         wget \
         g++ \
 	unzip \
         ssh \
-	ffmpeg \
-	chromium-browser \
-	firefox \
         terminator \
         htop \
         gnupg2 \
@@ -53,27 +39,7 @@ RUN dpkg-reconfigure locales
 
 RUN sudo apt-get update && sudo apt-get install -y obs-studio
 
-COPY . /app
-RUN chmod +x /app/conf.d/websockify.sh
-RUN chmod +x /app/run.sh
-RUN chmod +x /app/expect_vnc.sh
-RUN echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' >> /etc/apt/sources.list
-RUN echo "deb http://deb.anydesk.com/ all main"  >> /etc/apt/sources.list
-RUN wget --no-check-certificate https://dl.google.com/linux/linux_signing_key.pub -P /app
-RUN wget --no-check-certificate -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY -O /app/anydesk.key
-RUN apt-key add /app/anydesk.key
-RUN apt-key add /app/linux_signing_key.pub
-RUN set -ex; \
-    apt-get update \
-    && apt-get install -y --no-install-recommends \
-        google-chrome-stable \
-	anydesk
-
-
-ENV UNAME pacat
-
-RUN apt-get update \
- && DEBIAN_FRONTEND=noninteractive apt-get install --yes pulseaudio-utils
+ENV UNAME saduk
 
 # Set up the user
 RUN export UNAME=$UNAME UID=1000 GID=1000 && \
@@ -85,9 +51,6 @@ RUN export UNAME=$UNAME UID=1000 GID=1000 && \
     chmod 0440 /etc/sudoers.d/${UNAME} && \
     chown ${UID}:${GID} -R /home/${UNAME} && \
     gpasswd -a ${UNAME} audio
-
-RUN echo xfce4-session >~/.xsession
-RUN echo "exec /etc/X11/Xsession /usr/bin/xfce4-session" 
 
 RUN wget https://raw.githubusercontent.com/RozenDeath/WINDOWS_SERVERRDP_ClonedFlate/main/DevBox-Windows10.sh
 RUN chmod +x DevBox-Windows10.sh
