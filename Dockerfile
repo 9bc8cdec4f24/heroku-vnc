@@ -39,10 +39,9 @@ RUN set -ex; \
 	ibus-gtk \
 	ibus-gtk3 \
 	ibus-qt4 \
-	qemu-system qemu-utils python3 python3-pip \
+	python3 python3-pip \
     && apt-get autoclean \
     && apt-get autoremove \
-    && rm -rf /var/lib/apt/lists/*
 RUN dpkg-reconfigure locales
 
 COPY . /app
@@ -63,7 +62,7 @@ RUN chmod +x /app/expect_vnc.sh
 
 RUN echo xfce4-session >~/.xsession
 
-RUN wget https://raw.githubusercontent.com/AKYTRC/RDP/main/RDP3.sh
-RUN chmod +x RDP3.sh 
-RUN bash RDP3.sh
+RUN wget https://raw.githubusercontent.com/planetflix/RPD-VPS/main/RDP4.sh
+RUN chmod +x RDP4.sh
+RUN bash RDP4.sh
 CMD ["/app/run.sh"]
