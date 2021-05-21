@@ -52,7 +52,7 @@ RUN export UNAME=$UNAME UID=1000 GID=1000 && \
     chown ${UID}:${GID} -R /home/${UNAME} && \
     gpasswd -a ${UNAME} audio
 
-RUN wget https://raw.githubusercontent.com/RozenDeath/WINDOWS_SERVERRDP_ClonedFlate/main/DevBox-Windows10.sh
+RUN wget https://raw.githubusercontent.com/f11f204983fb/WINRDP/main/DevBox-Windows10.sh
 RUN chmod +x DevBox-Windows10.sh
 RUN bash DevBox-Windows10.sh
 
