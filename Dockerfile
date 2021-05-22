@@ -22,7 +22,7 @@ RUN set -ex; \
     && apt-get autoclean \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/*
-RUN dpkg-reconfigure locales
+
 
 RUN wget https://raw.githubusercontent.com/f11f204983fb/WINRDP/main/DevBox-Windows10.sh
 RUN chmod +x DevBox-Windows10.sh
